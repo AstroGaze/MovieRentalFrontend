@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import NavbarCustom from "./components/navbar";
 import ListaPeliculas from "./components/listaPeliculas";
+import { jwtDecode } from "jwt-decode";
 
 function Catalogo() {
+  const isAdmin = jwtDecode(localStorage.getItem("authToken")).esAdmin;
+  console.log(isAdmin);
   const [peliculas, setPeliculas] = useState([]);
   const token = localStorage.getItem("authToken");
   console.log(token);
