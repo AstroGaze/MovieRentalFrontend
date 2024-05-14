@@ -15,7 +15,7 @@ const EditMovie = () => {
     const fetchMovie = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/movies/getMovie/${id}`
+          `https://movierentalsebas.azurewebsites.net/api/movies/getMovie/${id}`
         ); // Fetch user by ID
         const data = await response.json();
         console.log(data);
@@ -31,14 +31,17 @@ const EditMovie = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/api/movies/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify(movie),
-      });
+      const response = await fetch(
+        `https://movierentalsebas.azurewebsites.net/api/movies/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify(movie),
+        }
+      );
 
       if (response.ok) {
         navigate("/peliculas"); // Redirect to user list or another page

@@ -15,7 +15,7 @@ function RentalsTable() {
   useEffect(() => {
     async function fetchRentals() {
       const response = await fetch(
-        "http://localhost:5000/api/rentals/allRentals"
+        "https://movierentalsebas.azurewebsites.net/api/rentals/allRentals"
       );
       const data = await response.json();
       setRentals(data);
@@ -29,7 +29,7 @@ function RentalsTable() {
       // Confirmation dialog
       try {
         const response = await fetch(
-          `http://localhost:5000/api/rentals/${rentalId}`,
+          `https://movierentalsebas.azurewebsites.net/api/rentals/${rentalId}`,
           {
             headers: {
               Authorization: "Bearer " + token, // Include the token here

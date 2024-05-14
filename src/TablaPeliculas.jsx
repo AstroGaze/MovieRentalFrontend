@@ -9,7 +9,9 @@ const TablaPeliculas = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/movies/"); // Fetch from your API endpoint
+        const response = await fetch(
+          "https://movierentalsebas.azurewebsites.net/api/movies/"
+        ); // Fetch from your API endpoint
         const data = await response.json();
         setMovies(data);
       } catch (error) {
@@ -27,7 +29,7 @@ const TablaPeliculas = () => {
       // Confirmation dialog
       try {
         const response = await fetch(
-          `http://localhost:5000/api/movies/${userId}`,
+          `https://movierentalsebas.azurewebsites.net/api/movies/${userId}`,
           {
             method: "DELETE",
           }

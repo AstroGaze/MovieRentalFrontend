@@ -10,7 +10,7 @@ const TablaUsuarios = () => {
     const fetchUsers = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/users/getUsuarios"
+          "https://movierentalsebas.azurewebsites.net/api/users/getUsuarios"
         ); // Fetch from your API endpoint
         const data = await response.json();
         setUsers(data);
@@ -29,7 +29,7 @@ const TablaUsuarios = () => {
       // Confirmation dialog
       try {
         const response = await fetch(
-          `http://localhost:5000/api/users/deleteUser/${userId}`,
+          `https://movierentalsebas.azurewebsites.net/api/users/deleteUser/${userId}`,
           {
             method: "DELETE",
           }

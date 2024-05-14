@@ -14,7 +14,7 @@ const RentarPelicula = () => {
     const fetchMovie = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/movies/getMovie/${id}`
+          `https://movierentalsebas.azurewebsites.net/api/movies/getMovie/${id}`
         );
         if (!response.ok) {
           throw new Error("Error fetching movie data");
@@ -35,14 +35,17 @@ const RentarPelicula = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:5000/api/rentals/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify({ movie: movie._id, returnDate }),
-      });
+      const response = await fetch(
+        "https://movierentalsebas.azurewebsites.net/api/rentals/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify({ movie: movie._id, returnDate }),
+        }
+      );
 
       if (!response.ok) {
         const data = await response.json();

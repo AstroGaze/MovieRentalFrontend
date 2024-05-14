@@ -14,12 +14,15 @@ function TablaMisRentas() {
 
   useEffect(() => {
     async function fetchRentals() {
-      const response = await fetch("http://localhost:5000/api/rentals/", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("authToken"),
-        },
-      });
+      const response = await fetch(
+        "https://movierentalsebas.azurewebsites.net/api/rentals/",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("authToken"),
+          },
+        }
+      );
       const data = await response.json();
       setRentals(data);
     }
@@ -32,7 +35,7 @@ function TablaMisRentas() {
       // Confirmation dialog
       try {
         const response = await fetch(
-          `http://localhost:5000/api/rentals/${rentalId}`,
+          `https://movierentalsebas.azurewebsites.net/api/rentals/${rentalId}`,
           {
             headers: {
               Authorization: "Bearer " + token, // Include the token here

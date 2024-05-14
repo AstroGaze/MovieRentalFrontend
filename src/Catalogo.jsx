@@ -10,7 +10,7 @@ function Catalogo() {
   const token = localStorage.getItem("authToken");
   console.log(token);
   const getPeliculas = () => {
-    fetch("http://localhost:5000/api/movies", {
+    fetch("https://movierentalsebas.azurewebsites.net/api/movies", {
       headers: {
         Authorization: "Bearer " + token, // Include the token here
       },

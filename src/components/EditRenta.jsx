@@ -20,7 +20,7 @@ function EditRenta() {
     const fetchRental = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/rentals/${id}`,
+          `https://movierentalsebas.azurewebsites.net/api/rentals/${id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -47,14 +47,17 @@ function EditRenta() {
     event.preventDefault();
     setError(null);
     try {
-      const response = await fetch(`http://localhost:5000/api/rentals/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("authToken"),
-        },
-        body: JSON.stringify({ returnDate, status }),
-      });
+      const response = await fetch(
+        `https://movierentalsebas.azurewebsites.net/api/rentals/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("authToken"),
+          },
+          body: JSON.stringify({ returnDate, status }),
+        }
+      );
 
       if (!response.ok) {
         const data = await response.json();

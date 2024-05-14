@@ -12,7 +12,7 @@ const Edit = () => {
     const fetchUser = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/users/getUsuario/${id}`
+          `https://movierentalsebas.azurewebsites.net/api/users/getUsuario/${id}`
         ); // Fetch user by ID
         const data = await response.json();
         console.log(data);
@@ -29,7 +29,7 @@ const Edit = () => {
     event.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/updateUsuario/${id}`,
+        `https://movierentalsebas.azurewebsites.net/users/updateUsuario/${id}`,
         {
           method: "PUT",
           headers: {
