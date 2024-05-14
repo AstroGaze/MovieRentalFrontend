@@ -25,9 +25,9 @@ function Form() {
         // Handle successful login (e.g., store token in local storage or context, then redirect)
         // Example:
         localStorage.setItem("authToken", data.token); // Store token
-        navigate("/Menu"); // Redirect to dashboard
+        navigate("/catalogo"); // Redirect to dashboard
       } else {
-        setLoginMessage(data.error || "Invalid credentials");
+        setLoginMessage(data.error || "Credenciales invalidas");
       }
     } catch (error) {
       console.error("Login error:", error);

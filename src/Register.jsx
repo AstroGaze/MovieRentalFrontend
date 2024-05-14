@@ -25,9 +25,7 @@ function Register() {
         setTimeout(navigate("/"), 3000);
         // After successful registration, you might want to redirect to login or do something else
       } else {
-        setRegistrationMessage(
-          data.error || "An error occurred during registration."
-        );
+        setRegistrationMessage(data.error || "Campos no completos");
       }
     } catch (error) {
       console.error("Registration error:", error);

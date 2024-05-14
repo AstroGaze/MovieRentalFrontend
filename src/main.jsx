@@ -14,6 +14,7 @@ import EditMovie from "./components/EditMovie.jsx";
 import RentarPelicula from "./components/rentarPelicula.jsx";
 import RentalsTable from "./TablaRenta.jsx";
 import EditRenta from "./components/EditRenta.jsx";
+import TablaMisRentas from "./TablaMisRentas.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -31,6 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/rentarPelicula/:id" element={<RentarPelicula />} />
         <Route path="/rentas" element={<RentalsTable />} />
         <Route path="/Editrenta/:id" element={<EditRenta />} />
+        <Route path="/misRentas" element={<TablaMisRentas />} />
       </Routes>
     </Router>
   </React.StrictMode>

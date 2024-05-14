@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import es from "date-fns/locale/es";
 import { Link } from "react-router-dom";
 
-function RentalsTable() {
+function TablaMisRentas() {
   const [rentals, setRentals] = useState([]);
   const token = localStorage.getItem("authToken");
   const formatDate = (dateString) => {
@@ -14,9 +14,12 @@ function RentalsTable() {
 
   useEffect(() => {
     async function fetchRentals() {
-      const response = await fetch(
-        "http://localhost:5000/api/rentals/allRentals"
-      );
+      const response = await fetch("http://localhost:5000/api/rentals/", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("authToken"),
+        },
+      });
       const data = await response.json();
       setRentals(data);
     }
@@ -25,7 +28,7 @@ function RentalsTable() {
   }, []);
 
   const handleDelete = async (rentalId) => {
-    if (window.confirm("¿Estas seguro que quieres eliminar esta renta?")) {
+    if (window.confirm("Are you sure you want to delete this movie?")) {
       // Confirmation dialog
       try {
         const response = await fetch(
@@ -69,9 +72,6 @@ function RentalsTable() {
                   Titulo de la película
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Nombre del Usuario
-                </th>
-                <th scope="col" className="px-6 py-3">
                   Fecha de la renta
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -79,9 +79,6 @@ function RentalsTable() {
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Estado
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Acciones
                 </th>
                 {/* ... other columns ... */}
               </tr>
@@ -95,28 +92,9 @@ function RentalsTable() {
                   <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {rental.movie.title}
                   </td>
-                  <td className="px-6 py-4">{rental.user.name}</td>
                   <td className="px-6 py-4">{formatDate(rental.rentalDate)}</td>
                   <td className="px-6 py-4">{formatDate(rental.returnDate)}</td>
                   <td className="px-6 py-4">{rental.status}</td>
-                  <td className="px-6 py-4 text-center">
-                    <Link to={`/Editrenta/${rental._id}`}>
-                      <a
-                        href="#"
-                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-4"
-                      >
-                        Edit
-                      </a>
-                    </Link>
-                    <a
-                      href="#"
-                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                      onClick={() => handleDelete(rental._id)}
-                      /* onClick={() => handleDelete(movie._id)} */
-                    >
-                      Delete
-                    </a>
-                  </td>
                   {/* ... other cells ... */}
                 </tr>
               ))}
@@ -128,4 +106,4 @@ function RentalsTable() {
   );
 }
 
-export default RentalsTable;
+export default TablaMisRentas;

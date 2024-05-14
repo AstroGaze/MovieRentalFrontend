@@ -23,7 +23,7 @@ const TablaPeliculas = () => {
   }, []);
 
   const handleDelete = async (userId) => {
-    if (window.confirm("Are you sure you want to delete this movie?")) {
+    if (window.confirm("¿Estas seguro que quieres eliminar esta pelicula?")) {
       // Confirmation dialog
       try {
         const response = await fetch(

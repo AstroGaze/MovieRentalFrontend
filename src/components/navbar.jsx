@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import { Link, renderMatches, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 function NavbarCustom() {
+  const navigate = useNavigate();
+  const isAdmin = jwtDecode(localStorage.getItem("authToken")).esAdmin;
+  const handleLogout = () => {
+    // Clear any user authentication tokens or session data here (e.g., localStorage)
+    localStorage.removeItem("authToken");
+
+    // Redirect the user to the login page or another appropriate page
+    navigate("/"); // Adjust the route as needed
+  };
   return (
     <nav className="bg-white dark:bg-sebasWhite border-b-4 border-grey-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -44,47 +54,74 @@ function NavbarCustom() {
         </button>
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-sebasWhite">
-            <li>
-              <Link to={"/catalogo"}>
-                <a
-                  href="#"
-                  class="md:active:text-red-700 block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                  aria-current="page"
-                >
-                  INICIO
-                </a>
-              </Link>
-            </li>
-            <Link to={"/usuarios"}>
+            {isAdmin && (
               <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  USUARIOS
-                </a>
+                <Link to={"/catalogo"}>
+                  <a
+                    href="#"
+                    class="md:active:text-red-700 block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    aria-current="page"
+                  >
+                    INICIO
+                  </a>
+                </Link>
               </li>
-            </Link>
-            <li>
-              <Link to={"/rentas"}>
-                <a
-                  href="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  RENTAS
-                </a>
+            )}
+            {isAdmin && (
+              <Link to={"/usuarios"}>
+                <li>
+                  <a
+                    href="#"
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    USUARIOS
+                  </a>
+                </li>
               </Link>
-            </li>
-            <Link to={"/peliculas"}>
+            )}
+            {isAdmin ? (
               <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  PELICULAS
-                </a>
+                <Link to={"/rentas"}>
+                  <a
+                    href="#"
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    RENTAS
+                  </a>
+                </Link>
               </li>
-            </Link>
+            ) : (
+              <li>
+                <Link to={"/misRentas"}>
+                  <a
+                    href="#"
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    MIS RENTAS
+                  </a>
+                </Link>
+              </li>
+            )}
+            {isAdmin && (
+              <Link to={"/peliculas"}>
+                <li>
+                  <a
+                    href="#"
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    PELICULAS
+                  </a>
+                </li>
+              </Link>
+            )}
+            <li>
+              <button
+                onClick={handleLogout}
+                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-700 md:p-0 dark:text-black md:dark:hover:text-red-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+              >
+                LOGOUT
+              </button>
+            </li>
           </ul>
         </div>
       </div>

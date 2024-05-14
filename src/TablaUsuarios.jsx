@@ -25,7 +25,7 @@ const TablaUsuarios = () => {
   }, []);
 
   const handleDelete = async (userId) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
+    if (window.confirm("¿Estas seguro que quieres eliminar este usuario?")) {
       // Confirmation dialog
       try {
         const response = await fetch(
