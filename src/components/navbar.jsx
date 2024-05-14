@@ -15,19 +15,18 @@ function NavbarCustom() {
   return (
     <nav className="bg-white dark:bg-sebasWhite border-b-4 border-grey-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a
-          href="https://flowbite.com/"
-          className="flex items-center space-x-3 rtl:space-x-reverse"
-        >
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8"
-            alt="Flowbite Logo"
-          />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-black">
-            PELICULAS
-          </span>
-        </a>
+        <Link to={"/catalogo"}>
+          <a className="flex items-center space-x-3 rtl:space-x-reverse">
+            <img
+              src="https://flowbite.com/docs/images/logo.svg"
+              className="h-8"
+              alt="Flowbite Logo"
+            />
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-black">
+              PELICULAS
+            </span>
+          </a>
+        </Link>
         <button
           data-collapse-toggle="navbar-default"
           type="button"
